@@ -10,7 +10,7 @@ class Oystercard
 
   def initialize
     @balance = 0
-    @journeys = []
+    @journeys = JourneyLog.new
   end
 
   def top_up(amount)
@@ -20,14 +20,12 @@ class Oystercard
 
   def touch_in(station)
     raise MIN_ERROR unless balance > MIN_FARE
-    log_journey unless @journey.nil?
-    @journey = Journey.new(station)
+    @journeys.start(station)
   end
 
   def touch_out(station)
-    @journey = Journey.new if @journey.nil?
-    @journey.complete_journey(station)
-    log_journey
+    @journeys.finish(station)
+    deduct(journeys.journey.fare)
   end
 
   private

@@ -2,7 +2,7 @@ require 'journeylog'
 describe JourneyLog do
   subject(:journeylog){described_class.new(journey_class)}
   let(:journey_class){double :journey_class, new: journey}
-  let(:journey){double :journey, complete_journey: nil}
+  let(:journey){double :journey, complete_journey: nil, fare: 1}
   let(:station){double :station}
 
   describe "#start" do
@@ -29,5 +29,12 @@ describe JourneyLog do
     end
   end
 
+  describe "#get_fare" do
+    it 'Should return fare for journey' do
+      journeylog.start(station)
+      journeylog.finish(station)
+      expect(journeylog.get_fare).to eq 1
+    end
+  end
 
 end

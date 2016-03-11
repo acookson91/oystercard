@@ -1,6 +1,8 @@
 class JourneyLog
 
-  def initialize(journey_class)
+  attr_reader :journey
+
+  def initialize(journey_class = Journey)
     @journey_class = journey_class
     @journey_history = []
   end
@@ -16,6 +18,10 @@ class JourneyLog
   def finish(station)
     current_journey.complete_journey(station)
     @journey_history << @journey
+  end
+
+  def get_fare
+    @journey.fare
   end
 
 private
