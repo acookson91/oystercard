@@ -3,6 +3,7 @@ require 'journey'
 describe Journey do
   subject(:journey) { described_class.new euston }
   let(:euston) { double :station }
+  let(:Oystercard){double :Oystercard}
 
   it { is_expected.to respond_to(:entry_station) }
 
